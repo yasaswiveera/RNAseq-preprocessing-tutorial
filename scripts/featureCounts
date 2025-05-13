@@ -1,0 +1,26 @@
+#!/bin/bash 
+
+BAM_DIR=”$1”
+GTF_FILE=”$2”
+OUTPUT_DIR=”$3”
+
+#output directory
+mkdir -p “$OUTPUT_DIR”
+
+BAM_FILES=$(ls "$BAM_DIR"/*_filtered.bam 2>/dev/null)
+
+#load environment and module 
+module load anaconda3/2023.09-0 
+conda activate subread_env
+
+featureCounts -a "$GTF_FILE" \
+              -t exon \
+              -g gene_id \
+              --countReadPairs \
+              -p \
+              -s 0 \
+              -T 4 \
+              -o "${OUTPUT_DIR}/featurecounts_matrix.txt" \
+              $BAM_FILES
+
+

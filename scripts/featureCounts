@@ -23,4 +23,4 @@ featureCounts -a "$GTF_FILE" \
               -o "${OUTPUT_DIR}/featurecounts_matrix.txt" \
               $BAM_FILES
 
-
+echo "FeatureCounts complete"

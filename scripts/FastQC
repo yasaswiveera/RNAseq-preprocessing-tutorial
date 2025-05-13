@@ -1,0 +1,15 @@
+#!/bin/bash 
+
+INPUT_DIR=”$1”
+OUTPUT_DIR=”$2”
+
+mkdir -p “OUTPUT_DIR”
+
+#load module and environment 
+module load anaconda3/2023.09-0
+conda activate fastqc 
+
+#run fastqc
+fastqc -o "$OUTPUT_DIR" "$INPUT_DIR"/*.{fastq,fastq.gz,bam}
+
+echo “FastQC complete” 

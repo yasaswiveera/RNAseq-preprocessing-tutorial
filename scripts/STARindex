@@ -1,0 +1,34 @@
+#!/bin/bash 
+
+GENOME_DIR=$1
+mkdir -p “GENOME_DIR”
+
+#genome and GTF annotation URLS (from ensembl)
+GENOME_URL=""
+GTF_URL=""
+
+GENOME_FA_GZ="${GENOME_DIR}/"
+GTF_GZ="${GENOME_DIR}/"
+
+GENOME_FA="${GENOME_FA_GZ%.gz}"
+GTF="${GTF_GZ%.gz}"
+
+#download genome and annotation files 
+wget -0 “$GENOME_FA_GZ” “$GENOME_URL”
+wget -0 “$GTF_GZ” “$GTF_URL”
+
+#unzip files 
+gunzip -f “$GENOME_FA_GZ”
+gunzip -f “$GTF_GZ”
+
+#load STAR
+module load STAR/2.7.11a
+
+STAR --runThreadN 6 \
+     --runMode genomeGenerate \
+     --genomeDir "$GENOME_DIR" \
+     --genomeFastaFiles "$GENOME_FA" \
+     --sjdbGTFfile "$GTF" \
+     --sjdbOverhang 99 
+
+echo "STAR index generated here: $GENOME_DIR"

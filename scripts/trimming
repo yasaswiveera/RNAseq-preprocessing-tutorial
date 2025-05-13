@@ -1,1 +1,30 @@
+#!/bin/bash 
 
+BASENAME=1
+INPUT_DIR=$2
+OUTPUT_DIR=$3
+ADAPTERS=$4
+
+#input 
+R1=${INPUT_DIR}/${BASENAME}_R1.fastq.gz
+R2=${INPUT_DIR}/${BASENAME}_R2.fastq.gz
+
+#output 
+OUTPUT_R1_PAIRED=${OUTPUT_DIR}/${BASENAME}_R1_paired.fastq.gz
+OUTPUT_R1_UNPAIRED=${OUTPUT_DIR}/${BASENAME}_R1_unpaired.fastq.gz
+OUTPUT_R2_PAIRED=${OUTPUT_DIR}/${BASENAME}_R2_paired.fastq.gz
+OUTPUT_R2_UNPAIRED=${OUTPUT_DIR}/${BASENAME}_R2_unpaired.fastq.gz
+
+#output directory 
+mkdir -p $OUTPUT_DIR
+
+#run trimmomatic 
+trimmomatic PE -phred33 -threads 4 \
+  $R1 $R2 \
+  $OUTPUT_R1_PAIRED $OUTPUT_R1_UNPAIRED \
+  $OUTPUT_R2_PAIRED $OUTPUT_R2_UNPAIRED \
+  ILLUMINACLIP:${ADAPTERS}:2:30:10:2 \
+  TOPHRED33 LEADING:25 TRAILING:25 MINLEN:50
+
+
+echo "Trimming completed for $BASENAME"

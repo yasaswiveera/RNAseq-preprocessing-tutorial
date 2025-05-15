@@ -4,14 +4,14 @@ This repository contains scripts for a full RNA-Seq analysis pipeline. Starting 
 ## Pipeline Overview 
 
 ### 1. Quality Control on Raw Reads 
-**FastQC** on raw FASTQ files 
+**FastQC** on raw FASTQ files\ 
 **MultiQC** summary report 
 
 ### 2. Adapater Trimming 
 **Trimmomatic** to trim adapter sequences 
 
 ### 3. Quality Control on Trimmed Reads 
-**FastQC** on trimmed FASTQ files 
+**FastQC** on trimmed FASTQ files\ 
 **MultiQC** summary report 
 
 ### 4. Generate STAR Genome Index 
@@ -21,12 +21,12 @@ This repository contains scripts for a full RNA-Seq analysis pipeline. Starting 
 **STAR** to align reads to reference genome 
 
 ### 6. Quality Control of Aligned Files 
-**FastQC** on *BAM* files 
+**FastQC** on *BAM* files\ 
 **MultiQC** summary report 
 
 ### 7. Quantification 
 **FeatureCounts** to quantify gene expression 
 
 ### 8. Differential Expression Analysis 
-**EdgeR** for statistical analysis 
+**EdgeR** for statistical analysis\ 
 Includes data normalization, exploratory analyses, and visualization techniques 

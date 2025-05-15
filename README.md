@@ -35,10 +35,10 @@ Includes data normalization, exploratory analyses, and visualization techniques
 **Inputs:** .fastq.gz files  
 **Outputs:** .html & .zip QC reports; MultiQC summary report  
 **Bash:**  
-'''
+```
 fastqc 0_raw_data/*.fastq.gz -o 1_qc_raw/  
 multiqc 1_qc_raw/ -o 1_qc_raw/  
-'''
+```
 
 ## 2. Adapter Trimming 
 **Inputs:** _R1.fastq.gz & _R2.fastq.gz  

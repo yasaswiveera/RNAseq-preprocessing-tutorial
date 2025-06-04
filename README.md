@@ -28,16 +28,8 @@ QC once again to see how well the reads mapped to genes and how many were counte
 **EdgeR** for statistical analysis; includes data normalization, exploratory analyses, and visualization techniques  
 Here, statistical modeling is used to identify differentially expressed genes between experimental groups. Further, *EdgeR* can help visualize any trends between samples and genes.    
 
-## 1. Quality Control on Raw Reads
-**Inputs:** .fastq.gz files  
-**Outputs:** .html & .zip QC reports; MultiQC summary report  
-**Bash:**  
-```
-fastqc 0_raw_data/*.fastq.gz -o 1_qc_raw/  
-multiqc 1_qc_raw/ -o 1_qc_raw/  
-```
 
-## 2. Adapter Trimming 
+## 1. Adapter Trimming 
 **Inputs:** _R1.fastq.gz & _R2.fastq.gz  
 **Outputs:** Paired and unpaired trimmed *FASTQ* files  
 **Bash:**  
@@ -51,16 +43,7 @@ trimmomatic PE -threads 8 -phred33 \
   MINLEN:36
 ```
 
-## 3. Quality Control on Trimmed Reads 
-**Inputs:** _paired.fastq.gz  
-**Outputs:** post-trimming QC reports; MultiQC summary  
-**Bash:**  
-```
-fastqc 2_trimmed_reads/*_paired.fastq.gz -o 3_qc_trimmed/  
-multiqc 3_qc_trimmed/ -o 3_qc_trimmed/
-```
-
-## 4. Generate STAR Genome Index 
+## 2. Generate STAR Genome Index 
 **Inputs:** Genome *FASTA* file; *GTF* annotation file  
 **Outputs:** *STAR* genome index files  
 **Bash:**  
@@ -73,7 +56,7 @@ STAR --runThreadN 8 \
   --sjdbOverhang 99
 ```
 
-## 5. Read Alignment 
+## 3. Read Alignment 
 **Inputs:** Trimmed paired *FASTQ* files, *STAR* genome index  
 **Outputs:** *BAM* files; *STAR* log files  
 **Bash:**  
@@ -86,7 +69,7 @@ STAR --runThreadN 8 \
   --outSAMtype BAM SortedByCoordinate
 ```
 
-## 6. Quality Control of Aligned Files  
+## 4. Quality Control of Aligned Files  
 **Inputs:** .bam files from STAR alignment  
 **Outputs:** QC summary file  
 **Bash:**  
@@ -95,7 +78,7 @@ fastqc 5_alignment/*.bam -o 6_qc_alignment/
 multiqc 6_qc_alignment/ -o 6_qc_alignment/
 ```
 
-## 7. Quantification  
+## 5. Quantification  
 **Inputs:** *BAM* files, *GTF* annotation files  
 **Outputs:** Count matrix (.txt)  
 **Bash:**  
@@ -106,7 +89,7 @@ featureCounts -T 8 -p \
   5_alignment/*.bam
 ```
 
-## 8. Differential Expression Analysis  
+## 6. Differential Expression Analysis  
 **Inputs:** *FeatureCounts* count matrix  
 **Outputs:**
 **Bash:**

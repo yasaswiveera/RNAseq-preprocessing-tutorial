@@ -3,38 +3,28 @@ This repository contains scripts for a full RNA-Seq analysis pipeline. Starting 
 
 ## Pipeline Overview 
 
-### 1. Quality Control on Raw Reads
-**FastQC** on raw FASTQ files  
-**MultiQC** summary report  
-This steps checks the quality of the raw sequencing data to identify any issues such as low-quality scores or overrepresented sequences before processing. *MultiQC* generates a report of the aggregated QC results to help identify any issues in samples.  
-
-### 2. Adapater Trimming 
+### 1. Adapater Trimming 
 **Trimmomatic** to trim adapter sequences  
-Here, any unwanted sequences that are added when sequencing such as adapter sequences or low-quality ends of reads are removed to improve alignment accuracy.  
+Any unwanted sequences that are added when sequencing such as adapter sequences or low-quality ends of reads are removed to improve alignment accuracy.  
 
-### 3. Quality Control on Trimmed Reads 
-**FastQC** on trimmed FASTQ files  
-**MultiQC** summary report  
-Quality of reads are re-checked here to ensure that trimming actually improved read quality and did not introduce any new issues.   
-
-### 4. Generate STAR Genome Index 
+### 2. Generate STAR Genome Index 
 **STAR** on downloaded reference genome  
 In order to align reads, *STAR* needs a reference genome index so that it can locate what part of the genome the RNA reads came from.  
 
-### 5. Read Alignment 
+### 3. Read Alignment 
 **STAR** to align reads to reference genome  
 In this step, the reads are mapped to the reference genome, which provides the genes/regions that the RNA came from.  
 
-### 6. Quantification 
+### 4. Quantification 
 **FeatureCounts** to quantify gene expression  
 Here, *FeatureCounts* counts how many reads mapped to each gene. The result is a matrix where each row is a gene and each column is a sample, with the data being the number of reads for each gene in each sample.   
 
-### 7. Quality Control of Aligned Files 
+### 5. Quality Control of Aligned Files 
 **FastQC** on *BAM* files  
 **MultiQC** summary report  
 QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.   
 
-### 8. Differential Expression Analysis 
+### 6. Differential Expression Analysis 
 **EdgeR** for statistical analysis; includes data normalization, exploratory analyses, and visualization techniques  
 Here, statistical modeling is used to identify differentially expressed genes between experimental groups. Further, *EdgeR* can help visualize any trends between samples and genes.    
 

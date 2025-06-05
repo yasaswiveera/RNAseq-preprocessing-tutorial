@@ -1,17 +1,36 @@
 #!/bin/bash 
 
-BASENAME=$1
-INPUT_DIR=$2
-OUTPUT_DIR=$3
-GENOME_DIR=$4
+#SBATCH --job-name=STAR_alignment
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=120G
+#SBATCH --time=24:00:00
+#SBATCH --mail-user=*email*
+#SBATCH --mail-type=ALL
 
-#input
-R1=${INPUT_DIR}/${BASENAME}R1_paired.fastq.gz
-R2=${INPUT_DIR}/${BASENAME}R2_paired.fastq.gz
+module load anaconda3/2023.09-0
+module load STAR/2.7.11a 
+
+BASENAME=$1
+INPUT_DIR=$input_directory_path
+OUTPUT_DIR=$output_directory_path
+GENOME_DIR=$genome_directory_path
+
+BASENAME=${1%_}
+R1=${INPUT_DIR}/${BASENAME}_R1_paired.fastq.gz
+R2=${INPUT_DIR}/${BASENAME}_R2_paired.fastq.gz
 
 #output
-mkdir -p $OUTPUT_DIR 
 OUTPUT_PREFIX=${OUTPUT_DIR}/${BASENAME}_ 
+
+echo $R1
+echo $R2
+
+# Define the output filenames
+  OUTPUT_BAM=${OUTPUT_DIR}/${BASENAME}_Aligned.sortedByCoord.out.bam
+
+echo $OUTPUT_BAM
 
 #run STAR aligner
 STAR --runThreadN 12 \

@@ -1,22 +1,27 @@
 #!/bin/bash 
 
-BAM_DIR=”$1”
-GTF_FILE=”$2”
-OUTPUT_DIR=”$3”
+#SBATCH --job-name=featureCounts
+#SBATCH --output=featureCounts_%j.out
+#SBATCH --error=featureCounts_%j.err
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=32G
+#SBATCH --time=04:00:00
+#SBATCH --mail-user=*email*
+#SBATCH --mail-type=END,FAIL
 
-#output directory
-mkdir -p “$OUTPUT_DIR”
+BAM_DIR=$BAMfiles_directory_path #should be STAR output directory 
+GTF_FILE=$genome_gtf_file_path
+OUTPUT_DIR=$output_directory_path
 
-BAM_FILES=$(ls "$BAM_DIR"/*_filtered.bam 2>/dev/null)
+BAM_FILES=$(ls "$BAM_DIR"/*Aligned.sortedByCoord.out.bam)
 
-#load environment and module 
 module load anaconda3/2023.09-0 
 conda activate subread_env
 
 featureCounts -a "$GTF_FILE" \
               -t exon \
               -g gene_id \
-              --countReadPairs \
               -p \
               -s 0 \
               -T 4 \

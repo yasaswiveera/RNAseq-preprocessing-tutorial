@@ -1,15 +1,19 @@
-#!/bin/bash 
+#!/bin/bash
 
-INPUT_DIR=”$1”
-OUTPUT_DIR=”$2”
+#SBATCH --job-name=FastQC_trimmed
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --time=04:00:00
+#SBATCH --mail-user=*email*
+#SBATCH --mail-type=ALL
 
-mkdir -p “OUTPUT_DIR”
-
-#load module and environment 
 module load anaconda3/2023.09-0
-conda activate fastqc 
+conda activate QC_env 
 
-#run fastqc
-fastqc -o "$OUTPUT_DIR" "$INPUT_DIR"/*.{fastq,fastq.gz,bam}
+INPUT_DIR=$input_directory_path
+OUTPUT_DIR=$output_directory_path
 
-echo “FastQC complete” 
+mkdir -p $OUTPUT_DIR
+
+fastqc -t 4 -o $OUTPUT_DIR $INPUT_DIR/*.fastq.gz

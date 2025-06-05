@@ -17,6 +17,8 @@ INPUT_DIR=$input_directory_path
 OUTPUT_DIR=$output_directory_path
 GENOME_DIR=$genome_directory_path
 
+mkdir -p $OUTPUT_DIR
+
 BASENAME=${1%_}
 R1=${INPUT_DIR}/${BASENAME}_R1_paired.fastq.gz
 R2=${INPUT_DIR}/${BASENAME}_R2_paired.fastq.gz

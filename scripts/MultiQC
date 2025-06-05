@@ -1,16 +1,19 @@
-#!/bin/bash 
+#!/bin/bash
 
-INPUT_DIR=”$1”
-OUT_DIR=”$2”
+#SBATCH --job-name=MultiQC_trimmed
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=8G
+#SBATCH --time=01:00:00
+#SBATCH --mail-user=*email*
+#SBATCH --mail-type=ALL
 
-#output
-mkdir -p “$OUTPUT_DIR”
+module load anaconda3/2023.09-0
+conda activate QC_env 
 
-#load module and environment 
-module load anaconda3/2023/09.0 
-conda activate multiqc 
+INPUT_DIR=$input_directory_path
+OUTPUT_DIR=$output_directory_path
 
-#run multiqc 
-multiqc “$INPUT_DIR” -o “OUTPUT_DIR”
+mkdir -p $OUTPUT_DIR
 
-echo “MultiQC complete” 
+multiqc $INPUT_DIR -o $OUTPUT_DIR

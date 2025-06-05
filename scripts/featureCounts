@@ -8,7 +8,7 @@
 #SBATCH --mem=32G
 #SBATCH --time=04:00:00
 #SBATCH --mail-user=*email*
-#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-type=ALL
 
 BAM_DIR=$BAMfiles_directory_path #should be STAR output directory 
 GTF_FILE=$genome_gtf_file_path

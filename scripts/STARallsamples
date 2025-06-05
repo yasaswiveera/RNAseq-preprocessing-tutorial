@@ -1,0 +1,12 @@
+#!/bin/bash
+
+INPUT_DIR=$input_directory_path
+
+for R1_file in ${INPUT_DIR}/*_R1_paired.fastq.gz; do
+  filename=$(basename "$R1_file")
+  BASENAME=${filename%_R1_paired.fastq.gz}_
+  
+  echo "Running STAR alignment for sample: $BASENAME"
+  
+  sbatch STARaligner.sh "$BASENAME"
+done

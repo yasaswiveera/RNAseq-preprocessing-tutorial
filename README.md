@@ -3,23 +3,23 @@ This repository contains scripts for a full RNA-Seq analysis pipeline. Starting 
 
 ## Pipeline Overview 
 
-### 1. Adapater Trimming 
+### Adapater Trimming 
 **Trimmomatic** to trim adapter sequences  
 Any unwanted sequences that are added when sequencing such as adapter sequences or low-quality ends of reads are removed to improve alignment accuracy.  
 
-### 2. Generate STAR Genome Index 
+### Generate STAR Genome Index 
 **STAR** on downloaded reference genome  
 In order to align reads, *STAR* needs a reference genome index so that it can locate what part of the genome the RNA reads came from.  
 
-### 3. Read Alignment 
+### Read Alignment 
 **STAR** to align reads to reference genome  
 In this step, the reads are mapped to the reference genome, which provides the genes/regions that the RNA came from.  
 
-### 4. Quantification 
+### Quantification 
 **FeatureCounts** to quantify gene expression  
 Here, *FeatureCounts* counts how many reads mapped to each gene. The result is a matrix where each row is a gene and each column is a sample, with the data being the number of reads for each gene in each sample.   
 
-### 5. Quality Control of Aligned Files 
+### Quality Control of Aligned Files 
 **FastQC** on *BAM* files  
 **MultiQC** summary report  
 QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.   
@@ -28,8 +28,18 @@ QC once again to see how well the reads mapped to genes and how many were counte
 **EdgeR** for statistical analysis; includes data normalization, exploratory analyses, and visualization techniques  
 Here, statistical modeling is used to identify differentially expressed genes between experimental groups. Further, *EdgeR* can help visualize any trends between samples and genes.    
 
+## 1. Setting Up 
+First, be sure to set your current directory to wherever your FASTA files are located: 
+```
+cd *path to data* 
+```
+Next, if you are working in a cluster, make sure to load the anaconda module (adjust accordingly to which version you are using)
 
-## 1. Adapter Trimming 
+```
+module load anaconda3/2023.09-0
+```
+
+## 2. Adapter Trimming 
 **Inputs:** _R1.fastq.gz & _R2.fastq.gz  
 **Outputs:** Paired and unpaired trimmed *FASTQ* files  
 **Bash:**  
@@ -43,7 +53,7 @@ trimmomatic PE -threads 8 -phred33 \
   MINLEN:36
 ```
 
-## 2. Generate STAR Genome Index 
+## 3. Generate STAR Genome Index 
 **Inputs:** Genome *FASTA* file; *GTF* annotation file  
 **Outputs:** *STAR* genome index files  
 **Bash:**  
@@ -56,7 +66,7 @@ STAR --runThreadN 8 \
   --sjdbOverhang 99
 ```
 
-## 3. Read Alignment 
+## 4. Read Alignment 
 **Inputs:** Trimmed paired *FASTQ* files, *STAR* genome index  
 **Outputs:** *BAM* files; *STAR* log files  
 **Bash:**  
@@ -69,7 +79,7 @@ STAR --runThreadN 8 \
   --outSAMtype BAM SortedByCoordinate
 ```
 
-## 4. Quality Control of Aligned Files  
+## 5. Quality Control of Aligned Files  
 **Inputs:** .bam files from STAR alignment  
 **Outputs:** QC summary file  
 **Bash:**  
@@ -78,7 +88,7 @@ fastqc 5_alignment/*.bam -o 6_qc_alignment/
 multiqc 6_qc_alignment/ -o 6_qc_alignment/
 ```
 
-## 5. Quantification  
+## 6. Quantification  
 **Inputs:** *BAM* files, *GTF* annotation files  
 **Outputs:** Count matrix (.txt)  
 **Bash:**  
@@ -89,7 +99,7 @@ featureCounts -T 8 -p \
   5_alignment/*.bam
 ```
 
-## 6. Differential Expression Analysis  
+## 7. Differential Expression Analysis  
 **Inputs:** *FeatureCounts* count matrix  
 **Outputs:**
 **Bash:**

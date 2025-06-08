@@ -68,13 +68,29 @@ sbatch trimmomatic.sh
 **Inputs:** Genome *FASTA* file; *GTF* annotation file  
 **Outputs:** *STAR* genome index files  
 **Bash:**  
+Firstly, download the genome file and GTF annotation files (example Rattus norvegicus  files from Ensembl):
+[https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz]([url](https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz))
+[https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz
+]([url](https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz))
+Create environment to run STAR (starEnv): 
 ```
-STAR --runThreadN 8 \  
-  --runMode genomeGenerate \  
-  --genomeDir 4_star_index/ \  
-  --genomeFastaFiles genome.fa \  
-  --sjdbGTFfile annotation.gtf \  
-  --sjdbOverhang 99
+conda create -n starEnv
+```
+Activate environment: 
+```
+conda activate starEnv
+```
+Install STAR in environment from bioconda: 
+```
+conda install bioconda::star
+```
+Activate script for STARindex (STARindex.sh): 
+```
+chmod +x STARindex.sh
+```
+Submit job for STARindex script: 
+```
+sbatch STARindex.sh
 ```
 
 ## 4. Read Alignment 

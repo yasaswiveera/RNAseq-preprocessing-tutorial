@@ -102,13 +102,17 @@ sbatch STARindex.sh
 **Inputs:** Trimmed paired *FASTQ* files, *STAR* genome index  
 **Outputs:** *BAM* files; *STAR* log files  
 **Bash:**  
+Activate STAR environment (if deactivated): 
 ```
-STAR --runThreadN 8 \  
-  --genomeDir 4_star_index/ \  
-  --readFilesIn 2_trimmed_reads/sample_R1_paired.fastq.gz 2_trimmed_reads/sample_R2_paired.fastq.gz \  
-  --readFilesCommand zcat \  
-  --outFileNamePrefix 5_alignment/sample_ \  
-  --outSAMtype BAM SortedByCoordinate
+conda activate starEnv
+```
+Activate script for STARaligner (STARaligner.sh): 
+```
+chmod +x STARaligner.sh
+```
+Submit job for STARaligner script: 
+```
+sbatch STARaligner.sh
 ```
 
 ## 5. Quality Control of Aligned Files  

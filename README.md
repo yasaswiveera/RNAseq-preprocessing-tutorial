@@ -24,14 +24,14 @@ Here, *FeatureCounts* counts how many reads mapped to each gene. The result is a
 **MultiQC** summary report  
 QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.   
 
-### 6. Differential Expression Analysis 
+### Differential Expression Analysis 
 **EdgeR** for statistical analysis; includes data normalization, exploratory analyses, and visualization techniques  
 Here, statistical modeling is used to identify differentially expressed genes between experimental groups. Further, *EdgeR* can help visualize any trends between samples and genes.    
 
 ## 1. Setting Up 
-First, be sure to set your current directory to wherever your FASTA files are located: 
+First, be sure to set your current directory to wherever your scripts are located (depending on which script you are running): 
 ```
-cd *path to data* 
+cd *path to scripts* 
 ```
 Next, if you are working in a cluster, make sure to load the anaconda module (adjust accordingly to which version you are using):
 
@@ -43,14 +43,25 @@ module load anaconda3/2023.09-0
 **Inputs:** _R1.fastq.gz & _R2.fastq.gz  
 **Outputs:** Paired and unpaired trimmed *FASTQ* files  
 **Bash:**  
+Create environment to run Trimmomatic (trimEnv) and make sure to update this name in the script accordingly: 
 ```
-trimmomatic PE -threads 8 -phred33 \  
-  0_raw_data/sample_R1.fastq.gz 0_raw_data/sample_R2.fastq.gz \  
-  2_trimmed_reads/sample_R1_paired.fastq.gz 2_trimmed_reads/sample_R1_unpaired.fastq.gz \  
-  2_trimmed_reads/sample_R2_paired.fastq.gz 2_trimmed_reads/sample_R2_unpaired.fastq.gz \  
-  ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 \  
-  SLIDINGWINDOW:4:20 \  
-  MINLEN:36
+conda create -n trimEnv
+```
+Activate environment: 
+```
+conda activate trimEnv
+```
+Install Trimmomatic in environment from bioconda: 
+```
+conda install bioconda::trimmomatic
+```
+Activate script for Trimmomatic (trimmomatic.sh): 
+```
+chmod +x trimmomatic.sh
+```
+Submit job for Trimmomatic script: 
+```
+sbatch trimmomatic.sh
 ```
 
 ## 3. Generate STAR Genome Index 

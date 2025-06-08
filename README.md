@@ -68,10 +68,10 @@ sbatch trimmomatic.sh
 **Inputs:** Genome *FASTA* file; *GTF* annotation file  
 **Outputs:** *STAR* genome index files  
 **Bash:**  
-Firstly, download the genome file and GTF annotation files (example Rattus norvegicus  files from Ensembl):
-[https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz]([https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz])
-[https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz
-]([url](https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz))
+Download the genome file and GTF annotation files (example Rattus norvegicus files from Ensembl):  
+[Rattus norvegicus genome file download](https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz)
+[Rattus norvegicus GTF annotation download](https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz)  
+
 Create environment to run STAR (starEnv): 
 ```
 conda create -n starEnv

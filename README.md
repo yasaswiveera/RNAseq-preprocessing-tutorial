@@ -72,6 +72,11 @@ Download the genome file and GTF annotation files (example Rattus norvegicus fil
 [Rattus norvegicus genome file download](https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz)
 [Rattus norvegicus GTF annotation download](https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz)  
 
+Unzip genome and GTF files (Rattus norvegicus example): 
+```
+gunzip Rattus_norvegicus.mRatBN7.2.dna.primary_assembly.fa.gz
+gunzip Rattus_norvegicus.mRatBN7.2.111.gtf.gz
+```
 Create environment to run STAR (starEnv): 
 ```
 conda create -n starEnv

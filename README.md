@@ -33,7 +33,7 @@ First, be sure to set your current directory to wherever your FASTA files are lo
 ```
 cd *path to data* 
 ```
-Next, if you are working in a cluster, make sure to load the anaconda module (adjust accordingly to which version you are using)
+Next, if you are working in a cluster, make sure to load the anaconda module (adjust accordingly to which version you are using):
 
 ```
 module load anaconda3/2023.09-0

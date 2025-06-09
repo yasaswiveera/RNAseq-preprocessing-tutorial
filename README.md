@@ -15,14 +15,15 @@ In order to align reads, *STAR* needs a reference genome index so that it can lo
 **STAR** to align reads to reference genome  
 In this step, the reads are mapped to the reference genome, which provides the genes/regions that the RNA came from.  
 
-### Quantification 
-**FeatureCounts** to quantify gene expression  
-Here, *FeatureCounts* counts how many reads mapped to each gene. The result is a matrix where each row is a gene and each column is a sample, with the data being the number of reads for each gene in each sample.   
-
 ### Quality Control of Aligned Files 
 **FastQC** on *BAM* files  
 **MultiQC** summary report  
-QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.     
+QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.  
+
+### Quantification 
+**FeatureCounts** to quantify gene expression  
+Here, *FeatureCounts* counts how many reads mapped to each gene. The result is a matrix where each row is a gene and each column is a sample, with the data being the number of reads for each gene in each sample.   
+   
 
 ## 1. Setting Up 
 First, be sure to set your current directory to wherever your scripts are located (depending on which script you are running): 

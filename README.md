@@ -7,6 +7,10 @@ This repository has scripts for an RNA-Seq data preprocessing pipeline. It start
 **Trimmomatic** to trim adapter sequences  
 Any unwanted sequences that are added when sequencing such as adapter sequences or low-quality ends of reads are removed to improve alignment accuracy.  
 
+### Quality Control of Trimmed Files 
+**FastQC** on *FASTA* files  
+QC before and after trimming files to see if adapter trimming improved quality of reads. This helps identify any disparities between or identify low-quality samples.  
+
 ### Generate STAR Genome Index 
 **STAR** on downloaded reference genome  
 In order to align reads, *STAR* needs a reference genome index so that it can locate what part of the genome the RNA reads came from.  
@@ -16,9 +20,8 @@ In order to align reads, *STAR* needs a reference genome index so that it can lo
 In this step, the reads are mapped to the reference genome, which provides the genes/regions that the RNA came from.  
 
 ### Quality Control of Aligned Files 
-**FastQC** on *BAM* files  
 **MultiQC** summary report  
-QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.  
+QC once again to see how well the reads mapped to genes and how many were counted. This produces a report of all samples, making it easier to compare between multiple samples.  
 
 ### Quantification 
 **FeatureCounts** to quantify gene expression  

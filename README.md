@@ -91,7 +91,7 @@ Rerun FastQC using steps from **2a** on trimmed files to see whether quality of 
 **Outputs:** *STAR* genome index files  
 **Bash:**  
 Download the genome file and GTF annotation files (example Rattus norvegicus files from Ensembl):  
-[Rattus norvegicus genome file download](https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz)
+[Rattus norvegicus genome file download](https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz)  
 [Rattus norvegicus GTF annotation download](https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz)  
 
 Unzip genome and GTF files (Rattus norvegicus example): 

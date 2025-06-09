@@ -1,5 +1,5 @@
 # RNA-seq Tutorial 
-This repository contains scripts for a full RNA-Seq analysis pipeline. Starting with raw sequencing reads, it undergoes quality control, read trimming, alignment, quantification, and statistical analysis to obtain differential expression results. 
+This repository has scripts for an RNA-Seq data preprocessing pipeline. It starts with raw sequencing reads and includes quality control, adapter trimming, genome indexing, alignment, and read quantification, preparing the data for downstream differential expression analysis.  
 
 ## Pipeline Overview 
 
@@ -22,11 +22,7 @@ Here, *FeatureCounts* counts how many reads mapped to each gene. The result is a
 ### Quality Control of Aligned Files 
 **FastQC** on *BAM* files  
 **MultiQC** summary report  
-QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.   
-
-### Differential Expression Analysis 
-**EdgeR** for statistical analysis; includes data normalization, exploratory analyses, and visualization techniques  
-Here, statistical modeling is used to identify differentially expressed genes between experimental groups. Further, *EdgeR* can help visualize any trends between samples and genes.    
+QC once again to see how well the reads mapped to genes and how many were counted. This further helps identify any disparities between or identify low-quality samples.     
 
 ## 1. Setting Up 
 First, be sure to set your current directory to wherever your scripts are located (depending on which script you are running): 
@@ -38,10 +34,34 @@ Next, if you are working in a cluster, make sure to load the anaconda module (ad
 ```
 module load anaconda3/2023.09-0
 ```
+Make sure to do these steps everytime you restart the shell so that everything is loaded.  
 
 ## 2. Adapter Trimming 
 **Inputs:** _R1.fastq.gz & _R2.fastq.gz  
 **Outputs:** Paired and unpaired trimmed *FASTQ* files  
+### 2a. Quality Check with FastQC
+**Bash:**  
+Create environment to run FastQC (fqcEnv): 
+```
+conda create -n fqcEnv
+```
+Activate environment: 
+```
+conda activate fqcEnv
+```
+Install FastQC in environment from bioconda: 
+```
+conda install bioconda::fastqc
+```
+Activate script for FastQC (FastQC.sh): 
+```
+chmod +x FastQC.sh
+```
+Submit job for FastQC script: 
+```
+sbatch FastQC.sh
+```
+### 2b. Trim Reads  
 **Bash:**  
 Create environment to run Trimmomatic (trimEnv) and make sure to update this name in the script accordingly: 
 ```
@@ -62,7 +82,9 @@ chmod +x trimmomatic.sh
 Submit job for Trimmomatic script: 
 ```
 sbatch trimmomatic.sh
-```
+```  
+### 2c. Quality Check on trimmed reads
+Rerun FastQC using steps from **2a** on trimmed files to see whether quality of reads improved after trimming adapter sequences.  
 
 ## 3. Generate STAR Genome Index 
 **Inputs:** Genome *FASTA* file; *GTF* annotation file  
@@ -101,6 +123,7 @@ sbatch STARindex.sh
 ## 4. Read Alignment 
 **Inputs:** Trimmed paired *FASTQ* files, *STAR* genome index  
 **Outputs:** *BAM* files; *STAR* log files  
+Make sure to have the STARallsamples script saved as well because that is what we use to loop through all given samples!  
 **Bash:**  
 Activate STAR environment (if deactivated): 
 ```
@@ -117,25 +140,50 @@ sbatch STARaligner.sh
 
 ## 5. Quality Control of Aligned Files  
 **Inputs:** .bam files from STAR alignment  
-**Outputs:** QC summary file  
+**Outputs:** MultiQC summary file  
 **Bash:**  
+Create environment to run MultiQC (mqcEnv): 
 ```
-fastqc 5_alignment/*.bam -o 6_qc_alignment/  
-multiqc 6_qc_alignment/ -o 6_qc_alignment/
+conda create -n mqcEnv
+```
+Activate environment: 
+```
+conda activate mqcEnv
+```
+Install MultiQC in environment from bioconda: 
+```
+conda install bioconda::multiqc
+```
+Activate script for MultiQC (MultiQC.sh): 
+```
+chmod +x MultiQC.sh
+```
+Submit job for MultiQC script: 
+```
+sbatch MultiQC.sh
 ```
 
 ## 6. Quantification  
 **Inputs:** *BAM* files, *GTF* annotation files  
 **Outputs:** Count matrix (.txt)  
 **Bash:**  
+Create environment to run featureCounts (subreadEnv): 
 ```
-featureCounts -T 8 -p \  
-  -a annotation.gtf \  
-  -o 7_featureCounts/featureCounts_matrix.txt \  
-  5_alignment/*.bam
+conda create -n subreadEnv
 ```
-
-## 7. Differential Expression Analysis  
-**Inputs:** *FeatureCounts* count matrix  
-**Outputs:**
-**Bash:**
+Activate environment: 
+```
+conda activate subreadEnv
+```
+Install Subread in environment from bioconda: 
+```
+conda install bioconda::subread
+```
+Activate script for featureCounts (featureCounts.sh): 
+```
+chmod +x featureCounts.sh
+```
+Submit job for featureCounts script: 
+```
+sbatch featureCounts.sh
+```

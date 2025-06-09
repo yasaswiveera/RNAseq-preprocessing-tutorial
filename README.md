@@ -1,4 +1,4 @@
-# RNA-seq Tutorial 
+# RNA-seq Preprocessing Tutorial 
 This repository has scripts for an RNA-Seq data preprocessing pipeline. It starts with raw sequencing reads and includes quality control, adapter trimming, genome indexing, alignment, and read quantification, preparing the data for downstream differential expression analysis.  
 
 ## Pipeline Overview 

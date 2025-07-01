@@ -1,30 +1,52 @@
 # RNA-seq Preprocessing Tutorial 
 This repository has scripts for an RNA-Seq data preprocessing pipeline. It starts with raw sequencing reads and includes quality control, adapter trimming, genome indexing, alignment, and read quantification, preparing the data for downstream differential expression analysis.  
 
+## Why Conda?
+Conda is an open-source package manager and environment management system. It simplifies software installation, especially in bioinformatics where many tools are Linux-based and have complex dependencies.  
+**Isolated environments:** Conda allows us to create separate environments so that different projects with different tools can run without conflict. 
+**Ease of installation:** Many bioinformatics tools (ex. *STAR*, *Trimmomatic*, *FastQC*, etc) are available through [Bioconda](https://bioconda.github.io/)   
+
+### Setting Up Conda
+It's recommended to install either Miniconda (which is a lightweight version) or Anaconda (full version) for managing environments.  
+**Example commands:**  
+Create new environment: 
+```
+conda create -n envName
+```
+Activate environment: 
+```
+conda activate envName
+```
+Install package from bioconda (example uses fastqc): 
+```
+conda install bioconda::fastqc
+```
+**It is recommended to create a new environment for each step of this pipeline. This tutorial has already included this process at each step.**
+
 ## Pipeline Overview 
 
 ### Adapater Trimming 
-**Trimmomatic** to trim adapter sequences  
+[Trimmomatic](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) to trim adapter sequences  
 Any unwanted sequences that are added when sequencing such as adapter sequences or low-quality ends of reads are removed to improve alignment accuracy.  
 
 ### Quality Control of Trimmed Files 
-**FastQC** on *FASTA* files  
+[FastQC](https://hbctraining.github.io/Training-modules/planning_successful_rnaseq/lessons/QC_raw_data.html) on *FASTA* files  
 QC before and after trimming files to see if adapter trimming improved quality of reads. This helps identify any disparities between or identify low-quality samples.  
 
 ### Generate STAR Genome Index 
-**STAR** on downloaded reference genome  
+[STAR](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) on downloaded reference genome  
 In order to align reads, *STAR* needs a reference genome index so that it can locate what part of the genome the RNA reads came from.  
 
 ### Read Alignment 
-**STAR** to align reads to reference genome  
+[STAR](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) to align reads to reference genome  
 In this step, the reads are mapped to the reference genome, which provides the genes/regions that the RNA came from.  
 
 ### Quality Control of Aligned Files 
-**MultiQC** summary report  
+[MultiQC](https://docs.seqera.io/multiqc) summary report  
 QC once again to see how well the reads mapped to genes and how many were counted. This produces a report of all samples, making it easier to compare between multiple samples.  
 
 ### Quantification 
-**FeatureCounts** to quantify gene expression  
+[FeatureCounts](https://bioconductor.org/packages/devel/bioc/vignettes/Rsubread/inst/doc/SubreadUsersGuide.pdf) to quantify gene expression  
 Here, *FeatureCounts* counts how many reads mapped to each gene. The result is a matrix where each row is a gene and each column is a sample, with the data being the number of reads for each gene in each sample.   
    
 

@@ -3,8 +3,8 @@ This repository has scripts for an RNA-Seq data preprocessing pipeline. It start
 
 ## Why Conda?
 Conda is an open-source package manager and environment management system. It simplifies software installation, especially in bioinformatics where many tools are Linux-based and have complex dependencies.  
-**Isolated environments:** Conda allows us to create separate environments so that different projects with different tools can run without conflict. 
-**Ease of installation:** Many bioinformatics tools (ex. *STAR*, *Trimmomatic*, *FastQC*, etc) are available through [Bioconda](https://bioconda.github.io/)   
+**Isolated environments:** Conda allows us to create separate environments so that different projects with different tools can run without conflict.  
+**Ease of installation:** Many bioinformatics tools (ex. *STAR*, *Trimmomatic*, *FastQC*, etc) are available through [Bioconda](https://bioconda.github.io/)    
 
 ### Setting Up Conda
 It's recommended to install either Miniconda (which is a lightweight version) or Anaconda (full version) for managing environments.  

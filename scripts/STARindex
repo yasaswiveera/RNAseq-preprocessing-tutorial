@@ -1,5 +1,21 @@
 !/bin/bash 
 
+#-------------------------------------------------------------------------------
+# description: 
+# this script generates a STAR genome index from a reference FASTA file and its
+# corresponding gene annotation (GTF). 
+# this index is required to align RNA-seq reads accurately. 
+
+# inputs: 
+# reference genome FASTA file 
+# gene annotation file (GTF)   
+
+# outputs: 
+# STAR genome index files in specified output directory 
+
+# be sure to edit GENOME_DIR, GENOME_FA, and GTF paths with specific paths
+#-------------------------------------------------------------------------------
+
 #SBATCH --job-name=STAR_index
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

@@ -1,5 +1,20 @@
 !/bin/bash 
 
+#-------------------------------------------------------------------------------
+# description: 
+# this script uses Trimmomatic to trim adapter sequences and perform quality 
+# filtering on FASTQ files. it outputs cleaned paired/unpaired reads. 
+
+# inputs: 
+# raw paired-end FASTQ files (*_R1_001.fastq.gz and *_R2_001.fastq.gz)
+# adapter sequence file   
+
+# outputs: 
+# paired and unpaired trimmed FASTQ files in specified output directory 
+
+# be sure to edit INPUT_DIR, OUTPUT_DIR, and ADAPTERS paths with specific paths
+#-------------------------------------------------------------------------------
+
 #SBATCH --job-name=Trimmomatic_step
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

@@ -1,5 +1,19 @@
 #!/bin/bash
 
+#-------------------------------------------------------------------------------
+# description: 
+# this script runs FastQC on all .fastq.gz files in the specified input directory. 
+# fastQC is a quality control analysis that is done on sequencing reads. 
+
+# inputs: 
+# FASTQ files (.fastq.gz) located in specified input directory 
+
+# outputs: 
+# FastQC reports that are saved to specified output directory 
+
+# be sure to edit INPUT_DIR and OUTPUT_DIR paths with specific paths
+#-------------------------------------------------------------------------------
+
 #SBATCH --job-name=FastQC_trimmed
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4

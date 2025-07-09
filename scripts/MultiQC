@@ -1,5 +1,19 @@
 #!/bin/bash
 
+#-------------------------------------------------------------------------------
+# description: 
+# this script runs MultiQC to summarize quality control reports from a 
+# specified input directory. 
+
+# inputs: 
+# a directory with QC output files (from FastQC for example)
+
+# outputs: 
+# a MultiQC HTML report in the specified output directory 
+
+# be sure to edit INPUT_DIR and OUTPUT_DIR paths with specific paths
+#-------------------------------------------------------------------------------
+
 #SBATCH --job-name=MultiQC_trimmed
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1

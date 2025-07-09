@@ -2,8 +2,7 @@
 
 #-------------------------------------------------------------------------------
 # description: 
-# this script runs STAR aligner on FASTQ files using a reference 
-# genome index.   
+# this script runs STAR aligner on FASTQ files using a reference genome index.   
 
 # inputs: 
 # paired-end FASTQ files (<basename>_R1_paired.fastq.gz and _R2_paired.fastq.gz)

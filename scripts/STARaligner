@@ -1,5 +1,20 @@
 #!/bin/bash 
 
+#-------------------------------------------------------------------------------
+# description: 
+# this script runs STAR aligner on FASTQ files using a reference 
+# genome index.   
+
+# inputs: 
+# paired-end FASTQ files (<basename>_R1_paired.fastq.gz and _R2_paired.fastq.gz)
+# STAR genome index directory  
+
+# outputs: 
+# sorted BAM file (<basename>_Aligned.sortedByCoord.out.bam) 
+
+# be sure to edit INPUT_DIR, OUTPUT_DIR, and GENOME_DIR paths with specific paths
+#-------------------------------------------------------------------------------
+
 #SBATCH --job-name=STAR_alignment
 #SBATCH --nodes=1
 #SBATCH --ntasks=1

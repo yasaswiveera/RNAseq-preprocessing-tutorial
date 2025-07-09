@@ -1,5 +1,21 @@
 #!/bin/bash 
 
+#-------------------------------------------------------------------------------
+# description: 
+# this script uses featureCounts to quantify gene expression by counting reads
+# aligned to genomic features in BAM files.  
+
+# inputs: 
+# sorted BAM files from STAR alignment 
+# GTF annotation files with specific gene features 
+
+# outputs: 
+# a gene count matrix in the specified output directory 
+# log files for job output and errors 
+
+# be sure to edit BAM_DIR, GTF_FILE, and OUTPUT_DIR paths with specific paths
+#-------------------------------------------------------------------------------
+
 #SBATCH --job-name=featureCounts
 #SBATCH --output=featureCounts_%j.out
 #SBATCH --error=featureCounts_%j.err

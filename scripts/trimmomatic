@@ -24,6 +24,8 @@
 #SBATCH --mail-user=*email*
 #SBATCH --mail-type=ALL
 
+module load anaconda3/2023.09-0
+conda activate $trimmomatic_env
 
 INPUT_DIR=$input_directory_path
 OUTPUT_DIR=$output_directory_path
@@ -31,9 +33,6 @@ OUTPUT_DIR=$output_directory_path
 mkdir -p $OUTPUT_DIR
 
 ADAPTERS=$adapters_path
-
-module load anaconda3/2023.09-0
-conda activate $trimmomatic_env
 
 for R1 in ${INPUT_DIR}/*_R1_001.fastq.gz; do
   BASENAME=$(basename "$R1" _R1_001.fastq.gz)

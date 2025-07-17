@@ -26,6 +26,9 @@
 #SBATCH --mail-user=*email*
 #SBATCH --mail-type=ALL
 
+module load anaconda3/2023.09-0 
+conda activate subread_env
+
 BAM_DIR=$BAMfiles_directory_path #should be STAR output directory 
 GTF_FILE=$genome_gtf_file_path
 OUTPUT_DIR=$output_directory_path
@@ -33,9 +36,6 @@ OUTPUT_DIR=$output_directory_path
 mkdir -p $OUTPUT_DIR
 
 BAM_FILES=$(ls "$BAM_DIR"/*Aligned.sortedByCoord.out.bam)
-
-module load anaconda3/2023.09-0 
-conda activate subread_env
 
 featureCounts -a "$GTF_FILE" \
               -t exon \

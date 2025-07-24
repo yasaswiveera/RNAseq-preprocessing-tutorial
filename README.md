@@ -4,10 +4,12 @@ This repository has scripts for an RNA-Seq data preprocessing pipeline. It start
 ## Why Conda?
 Conda is an open-source package manager and environment management system. It simplifies software installation, especially in bioinformatics where many tools are Linux-based and have complex dependencies.  
 **Isolated environments:** Conda allows us to create separate environments so that different projects with different tools can run without conflict.  
-**Ease of installation:** Many bioinformatics tools (ex. *STAR*, *Trimmomatic*, *FastQC*, etc) are available through [Bioconda](https://bioconda.github.io/)    
+**Ease of installation:** Many bioinformatics tools (ex. *STAR*, *Trimmomatic*, *FastQC*, etc) are available through [Bioconda](https://bioconda.github.io/) , which is a community-maintained collections of bioinformatics packages.    
 
 ### Setting Up Conda
-It's recommended to install either Miniconda (which is a lightweight version) or Anaconda (full version) for managing environments.  
+It's recommended to install either **Miniconda** (which is a lightweight version) or **Anaconda** (full version) for managing environments.  
+For bioinformatics workflows (such as RNA-Seq), **Miniconda** is usually preferred since it allows users to install only the tools necessary and keeps the environment minimal. 
+
 **Example commands:**  
 Create new environment: 
 ```
@@ -27,7 +29,7 @@ conda install bioconda::fastqc
 
 ### Adapater Trimming 
 [Trimmomatic](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf) to trim adapter sequences  
-Any unwanted sequences that are added when sequencing such as adapter sequences or low-quality ends of reads are removed to improve alignment accuracy.  
+Any unwanted sequences that are added when sequencing such as adapter sequences or low-quality ends of reads are removed to improve alignment accuracy. In order to perform this step accurately,  
 
 ### Quality Control of Trimmed Files 
 [FastQC](https://hbctraining.github.io/Training-modules/planning_successful_rnaseq/lessons/QC_raw_data.html) on *FASTA* files  

@@ -198,14 +198,14 @@ Rerun FastQC using steps from **2a** on trimmed files to see whether quality of 
 **Inputs:** Genome *FASTA* file; *GTF* annotation file  
 **Outputs:** *STAR* genome index files  
 **Bash:**  
-Download the genome file and GTF annotation files (example Rattus norvegicus files from Ensembl):  
-[Rattus norvegicus genome file download](https://ftp.ensembl.org/pub/release-114/fasta/rattus_norvegicus/dna_index/Rattus_norvegicus.GRCr8.dna.toplevel.fa.gz)  
-[Rattus norvegicus GTF annotation download](https://ftp.ensembl.org/pub/release-114/gtf/rattus_norvegicus/Rattus_norvegicus.GRCr8.114.gtf.gz)  
+Download the genome file and GTF annotation files (example Mus musculus files from Ensembl):  
+[Mus musculus genome file download](https://ftp.ensembl.org/pub/release-115/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.toplevel.fa.gz)  
+[Mus musculus GTF annotation download](https://ftp.ensembl.org/pub/release-115/gtf/mus_musculus/Mus_musculus.GRCm39.115.gtf.gz)  
 
-Unzip genome and GTF files (Rattus norvegicus example): 
+Unzip genome and GTF files (Mus musculus example): 
 ```
-gunzip Rattus_norvegicus.mRatBN7.2.dna.primary_assembly.fa.gz
-gunzip Rattus_norvegicus.mRatBN7.2.111.gtf.gz
+gunzip Mus_musculus.GRCm39.dna.toplevel.fa.gz
+gunzip Mus_musculus.GRCm39.115.gtf.gz
 ```
 Create environment to run STAR (starEnv): 
 ```
